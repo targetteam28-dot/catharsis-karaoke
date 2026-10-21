@@ -28,7 +28,8 @@ body{margin:0;background:var(--bg);color:var(--text);font:500 16px/1.5 Manrope,s
 .bg{position:fixed;top:0;bottom:0;left:50%;width:100%;max-width:480px;transform:translateX(-50%);z-index:0;pointer-events:none;overflow:hidden;background:
 radial-gradient(90% 38% at 50% 0%,rgba(30,150,170,.30),transparent 70%),
 radial-gradient(80% 40% at 100% 60%,rgba(20,120,150,.38),transparent 70%),
-radial-gradient(80% 40% at 0% 100%,rgba(20,120,150,.34),transparent 70%),var(--bg)}
+linear-gradient(180deg,rgba(3,8,13,.35),rgba(3,8,13,.62)),url(bg.webp) center top/cover no-repeat,var(--bg)}
+.bg svg{display:none}
 .bg svg{width:100%;height:100%;display:block}
 .page>*{position:relative;z-index:1}
 h1,h2,h3,.d{font-family:Unbounded,sans-serif;font-weight:900;font-style:italic;margin:0;line-height:1.05}
@@ -43,7 +44,7 @@ a{color:inherit}
 .call{clip-path:var(--cut-s);background:var(--grad);color:var(--ink);font:900 italic 12px Unbounded,sans-serif;padding:10px 16px;text-decoration:none}
 
 /* hero */
-.photo{height:330px;margin-bottom:-90px;background:url(hero.jpg) center 20%/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.photo{height:330px;margin-bottom:-90px;display:grid;place-items:center;padding-top:40px}.photo img{width:min(300px,78vw);height:auto;opacity:.55;animation:spin 90s linear infinite;filter:drop-shadow(0 0 30px rgba(92,232,255,.25))}@keyframes spin{to{transform:rotate(360deg)}}
 .hero{text-align:center;padding:0 20px 34px}
 .tag{display:inline-block;background:var(--grad);font:700 13px Unbounded,sans-serif;padding:9px 20px;box-shadow:0 0 26px rgba(92,232,255,.5);text-shadow:0 1px 5px rgba(0,60,80,.4)}
 .hero .small{font-size:clamp(34px,10.5vw,48px);margin-top:14px;color:#e4e9f1}
@@ -103,7 +104,7 @@ footer a{color:var(--cyan)}
 .sticky.on{translate:-50% 0}
 dialog{max-width:420px;width:calc(100% - 36px);background:#0a1c27;color:var(--text);border:1.5px solid var(--line);padding:22px}
 dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bottom:10px}dialog p{font-size:14px;color:var(--muted)}dialog button{margin-top:10px;background:none;border:1.5px solid var(--line);color:var(--text);padding:10px 20px;font:700 13px Unbounded,sans-serif}
-.gift{padding-top:26px}
+.gift{padding-top:26px}.gift-card{display:block;text-decoration:none;color:inherit}.gift-card .in{display:flex;align-items:center;gap:18px}.gift-ico{flex:none;width:58px}.gift-card h3{font-size:clamp(19px,5.6vw,24px)}.gift-card .go{display:inline-block;margin-top:12px;font:900 italic 13px Unbounded,sans-serif;color:var(--cyan)}
 .gift-top{font:700 14px Unbounded,sans-serif;color:var(--muted);margin:0 0 -4px 6px}
 .gift-n{font:900 clamp(170px,56vw,230px)/.9 Unbounded,sans-serif;margin:0 0 0 2px;letter-spacing:-.04em;background:linear-gradient(180deg,#f6f6f4 15%,rgba(246,246,244,.12) 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .gift-pill{position:relative;display:block;margin:-46px 0 0;padding:18px 26px;border-radius:999px;background:var(--grad);color:var(--ink);font:900 italic clamp(15px,4.4vw,19px)/1.2 Unbounded,sans-serif;text-align:center;box-shadow:0 10px 40px rgba(92,232,255,.35)}
@@ -139,7 +140,7 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
   <a class="call" href="https://t.me/catharsisgaming" target="_blank" rel="noopener">Написать</a>
 </header>
 
-<div class="photo" role="img" aria-label="Друзья поют в караоке"></div>
+<div class="photo" aria-hidden="true"><img src="ring.webp" alt=""></div>
 <div class="hero">
   <h1><span class="d big" style="display:block">КАРАОКЕ</span><span class="sr"> в Варшаве, Catharsis Gaming Club</span></h1>
   <p class="lead">Закрытая комната только для вашей компании. Свой микрофон, бар и кухня клуба рядом.</p>
@@ -164,9 +165,10 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
 </section>
 
 <section class="gift" id="offer">
-  <p class="gift-top">При брони от 2 часов</p>
-  <div class="gift-n" aria-hidden="true">2</div>
-  <p class="gift-pill"><span class="sr">2 </span>бутылки просекко в подарок</p>
+  <a class="cut gift-card" href="#form"><div class="in">
+    <svg class="gift-ico" viewBox="0 0 64 80" fill="none" stroke="#5ce8ff" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M14 6h8v14c0 4 6 8 6 16v38H8V36c0-8 6-12 6-16z"/><path d="M38 10h8v12c0 4 6 8 6 16v36H32V38c0-8 6-12 6-16z"/><path d="M8 48h20M32 50h20"/></svg>
+    <div><span class="badge">Подарок</span><h3>2 бутылки просекко</h3><p>При брони от 2 часов</p><span class="go">Забронировать →</span></div>
+  </div></a>
 </section>
 
 <section id="form">
@@ -216,7 +218,7 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
 
 <script>
 /* Вставь сюда ссылку Web App из Google Apps Script (см. google-apps-script.gs) */
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbyCxiwrXRNmhYp4zFoRMo7LfnuXwlOeLCOKkph03dlVZFGOPO2QOBosBHgowE0y9GbrFg/exec";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSJGVYHNmJAI0so9gH6iusIpUpZI8TW86aVivyRlu_xHja8n6TmyjJpnm8eTfzLYjA8g/exec";
 
 /* ribbons background */
 (function(){
@@ -238,7 +240,7 @@ if(big){var t=big.textContent;big.parentNode.setAttribute('aria-label',t+' в В
 function prep(el){var n=el.firstChild;if(!n||n.nodeType!==3)return;var m=n.nodeValue.match(/^(\d+)(.*)$/);if(!m)return;var to=+m[1],suf=m[2];n.nodeValue='0'+suf;el.__run=function(){var t0=performance.now();(function s(t){var p=Math.min((t-t0)/1200,1);n.nodeValue=Math.round(to*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(s)})(t0)}}
 document.querySelectorAll('.big-n,.price').forEach(prep);
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;el.classList.add('vis');io.unobserve(el);el.querySelectorAll('.big-n,.price').forEach(function(x){x.__run&&x.__run()})})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-document.querySelectorAll('section').forEach(function(sec){sec.querySelectorAll('h2,.sub,.cut,details,#f>label,#f>fieldset,#f>#sb,.note,.gift-top,.gift-n,.gift-pill').forEach(function(el,i){el.classList.add('rv');el.style.setProperty('--d',Math.min(i*.07,.45)+'s');io.observe(el)})});
+document.querySelectorAll('section').forEach(function(sec){sec.querySelectorAll('h2,.sub,.cut,details,#f>label,#f>fieldset,#f>#sb,.note').forEach(function(el,i){el.classList.add('rv');el.style.setProperty('--d',Math.min(i*.07,.45)+'s');io.observe(el)})});
 var ph=document.querySelector('.photo'),rb=document.getElementById('rib'),tk=0;
 addEventListener('scroll',function(){if(tk)return;tk=1;requestAnimationFrame(function(){var y=Math.min(scrollY,1200);ph.style.transform='translate3d(0,'+(y*.22)+'px,0)';rb.style.transform='translate3d(0,'+(-y*.03)+'px,0) scale(1.06)';tk=0})},{passive:true});
 })();
