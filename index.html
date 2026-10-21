@@ -44,7 +44,7 @@ a{color:inherit}
 .call{clip-path:var(--cut-s);background:var(--grad);color:var(--ink);font:900 italic 12px Unbounded,sans-serif;padding:10px 16px;text-decoration:none}
 
 /* hero */
-.photo{height:330px;margin-bottom:-90px;display:grid;place-items:center;padding-top:40px}.photo img{width:min(300px,78vw);height:auto;opacity:.55;animation:ringIn 1.8s cubic-bezier(.2,.8,.2,1) both,spin 90s linear 1.8s infinite;filter:drop-shadow(0 0 30px rgba(92,232,255,.25))}@keyframes spin{to{transform:rotate(360deg)}}
+.photo{height:150px}@keyframes spin{to{transform:rotate(360deg)}}
 .hero{text-align:center;padding:0 20px 34px}
 .tag{display:inline-block;background:var(--grad);font:700 13px Unbounded,sans-serif;padding:9px 20px;box-shadow:0 0 26px rgba(92,232,255,.5);text-shadow:0 1px 5px rgba(0,60,80,.4)}
 .hero .small{font-size:clamp(34px,10.5vw,48px);margin-top:14px;color:#e4e9f1}
@@ -118,7 +118,7 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
 #offer{position:relative;padding-top:40px;padding-bottom:20px}
 .oring{position:absolute;left:-30px;top:50%;width:160px;translate:0 -50%;z-index:0;pointer-events:none}
 .oring img{width:100%;display:block;opacity:.6;animation:spin 40s linear infinite}
-#offer .gift-card{position:relative;z-index:1;margin-left:58px;overflow:hidden}
+#offer .gift-card{position:relative;z-index:1;overflow:hidden}
 #offer .gift-card .in{background:linear-gradient(160deg,rgba(16,50,63,.92),rgba(9,24,35,.92))}
 #offer .gift-card::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.25),transparent);transform:skewX(-20deg);pointer-events:none}
 .js #offer .oring{opacity:0;transform:scale(.6) rotate(-90deg);transition:opacity 1s,transform 1.4s cubic-bezier(.2,.8,.2,1)}
@@ -159,7 +159,7 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
   <a class="call" href="https://t.me/catharsisgaming" target="_blank" rel="noopener">Написать</a>
 </header>
 
-<div class="photo" aria-hidden="true"><img src="ring.webp" alt=""></div>
+<div class="photo" aria-hidden="true"></div>
 <div class="hero">
   <h1><span class="d big" style="display:block">КАРАОКЕ</span><span class="sr"> в Варшаве, Catharsis Gaming Club</span></h1>
   <p class="lead">Закрытая комната только для вашей компании. Свой микрофон, бар и кухня клуба рядом.</p>
@@ -184,7 +184,6 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
 </section>
 
 <section class="gift" id="offer">
-  <div class="oring" aria-hidden="true"><img src="ring.webp" alt=""></div>
   <a class="cut gift-card" href="#form"><div class="in">
     <svg class="gift-ico" viewBox="0 0 64 80" fill="none" stroke="#5ce8ff" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M14 6h8v14c0 4 6 8 6 16v38H8V36c0-8 6-12 6-16z"/><path d="M38 10h8v12c0 4 6 8 6 16v36H32V38c0-8 6-12 6-16z"/><path d="M8 48h20M32 50h20"/></svg>
     <div><span class="badge">Подарок</span><h3>2 бутылки просекко</h3><p>При брони от 2 часов</p><span class="go">Забронировать →</span></div>
