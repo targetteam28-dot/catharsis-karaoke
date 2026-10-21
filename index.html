@@ -275,9 +275,25 @@ f.addEventListener("submit",async function(e){
   try{
     if(ENDPOINT){await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body:body})}
     f.style.display="none";document.getElementById("done").style.display="block";
-    if(window.fbq)fbq("track","Lead");
+    if(window.fbq){var hr=parseInt(d.get("hours"))||1;fbq("track","Lead",{content_name:"karaoke",value:159*hr,currency:"PLN",num_items:hr})}
   }catch(x){err.innerHTML="Не удалось отправить. Напишите нам в <a href='https://t.me/catharsisgaming'>Telegram</a>.";err.style.display="block";sb.disabled=false;sb.textContent="Отправить заявку"}
 });
+
+/* Meta Pixel events */
+(function(){if(!window.fbq)return;var once={};function t(n,p,c){if(once[n+(p&&p.content_name||'')])return;once[n+(p&&p.content_name||'')]=1;fbq(c?'trackCustom':'track',n,p||{})}
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var u=a.href||'';
+if(/t\.me\//.test(u))fbq('track','Contact',{content_name:'telegram'});
+else if(/instagram\.com/.test(u))fbq('track','Contact',{content_name:'instagram'});
+else if(/google\.com\/maps/.test(u))fbq('track','FindLocation');
+else if(/#form$/.test(u))fbq('trackCustom','BookClick',{content_name:a.closest('#offer')?'offer':a.closest('#st')?'sticky':'hero'})});
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var id=x.target.id;io.unobserve(x.target);
+if(id==='price')t('ViewContent',{content_name:'karaoke_prices',value:159,currency:'PLN'});
+if(id==='offer')t('ViewOffer',{content_name:'prosecco_gift'},1);
+if(id==='form')t('ViewForm',{content_name:'booking_form'},1)})},{threshold:.4});
+['price','offer','form'].forEach(function(i){var el=document.getElementById(i);el&&io.observe(el)});
+document.getElementById('f').addEventListener('focusin',function(){t('InitiateCheckout',{content_name:'karaoke',value:318,currency:'PLN'})});
+document.getElementById('f').addEventListener('change',function(e){if(e.target.name==='hours')fbq('trackCustom','SelectHours',{hours:e.target.value})});
+})();
 </script>
 </body>
 </html>
