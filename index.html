@@ -237,6 +237,7 @@ dialog::backdrop{background:rgba(0,0,0,.75)}dialog h3{font-size:17px;margin-bott
 
 <dialog id="dlg"><h3>Политика конфиденциальности</h3><p>Мы получаем имя, Telegram, телефон и количество часов, которые вы указываете в форме. Данные нужны только для связи по бронированию и не передаются третьим лицам. Чтобы изменить или удалить данные, свяжитесь с нами.</p><form method="dialog"><button>Закрыть</button></form></dialog>
 
+<script src="config.js"></script>
 <script>
 /* Вставь сюда ссылку Web App из Google Apps Script (см. google-apps-script.gs) */
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSJGVYHNmJAI0so9gH6iusIpUpZI8TW86aVivyRlu_xHja8n6TmyjJpnm8eTfzLYjA8g/exec";
@@ -261,6 +262,17 @@ new IntersectionObserver(function(){const h=hb.getBoundingClientRect().bottom<0,
 addEventListener("scroll",function(){const h=hb.getBoundingClientRect().bottom<0,f=fm.getBoundingClientRect();st.classList.toggle("on",h&&!(f.top<innerHeight*.6&&f.bottom>0))},{passive:true});
 document.getElementById("pv").onclick=function(e){e.preventDefault();document.getElementById("dlg").showModal()};
 
+/* Telegram: сповіщення про нового ліда (токен і група — у config.js) */
+function notifyTG(){
+  var C=window.CONFIG||{};if(!C.TG_TOKEN||!C.TG_CHAT_ID)return;
+  var n=new Date(),o={timeZone:"Europe/Warsaw"};
+  var date=n.toLocaleDateString("uk-UA",Object.assign({day:"2-digit",month:"2-digit",year:"numeric"},o));
+  var time=n.toLocaleTimeString("uk-UA",Object.assign({hour:"2-digit",minute:"2-digit",hour12:false},o));
+  var text="🔔 <b>НОВИЙ ЛІД КАРАОКЕ!</b>\n\n"+date+"\n"+time+"\n\nКонтактні дані ліда в таблиці, обов'язково змініть статус після контакту: "+C.SHEET_URL;
+  try{fetch("https://api.telegram.org/bot"+C.TG_TOKEN+"/sendMessage",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,
+    body:JSON.stringify({chat_id:C.TG_CHAT_ID,text:text,parse_mode:"HTML",disable_web_page_preview:true})}).catch(function(){})}catch(x){}
+}
+
 /* form -> Google Sheet via Apps Script */
 const q=new URLSearchParams(location.search);
 const f=document.getElementById("f"),err=document.getElementById("err"),sb=document.getElementById("sb");
@@ -274,6 +286,7 @@ f.addEventListener("submit",async function(e){
   sb.disabled=true;sb.textContent="Отправляем...";
   try{
     if(ENDPOINT){await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body:body})}
+    notifyTG();
     f.style.display="none";document.getElementById("done").style.display="block";
     if(window.fbq){var hr=parseInt(d.get("hours"))||1;fbq("track","Lead",{content_name:"karaoke",value:159*hr,currency:"PLN",num_items:hr})}
   }catch(x){err.innerHTML="Не удалось отправить. Напишите нам в <a href='https://t.me/catharsisgaming'>Telegram</a>.";err.style.display="block";sb.disabled=false;sb.textContent="Отправить заявку"}
